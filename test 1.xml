@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Database>
+    <ServerArchitecture>Specify 7's</ServerArchitecture>
+    <EnhancedDataManagementCapabilities>36%</EnhancedDataManagementCapabilities>
+    <ProjectAim>
+        <Description>Streamline the museum's collection management processes, ensuring efficient cataloging, organization, and accessibility of its extensive natural history specimens.</Description>
+    </ProjectAim>
+    <Tables>
+        <Table name="Specimens">
+            <Columns>
+                <Column name="SpecimenID" type="INTEGER" primaryKey="true" />
+                <Column name="Species" type="TEXT" />
+                <Column name="Location" type="TEXT" />
+                <Column name="CollectionDate" type="DATE" />
+                <Column name="Collector" type="TEXT" />
+                <Column name="Description" type="TEXT" />
+                <Column name="Category" type="TEXT" />
+            </Columns>
+        </Table>
+        <Table name="Researchers">
+            <Columns>
+                <Column name="ResearcherID" type="INTEGER" primaryKey="true" />
+                <Column name="Name" type="TEXT" />
+                <Column name="Affiliation" type="TEXT" />
+                <Column name="Specialization" type="TEXT" />
+            </Columns>
+        </Table>
+        <!-- Add more tables as needed -->
+    </Tables>
+    <Views>
+        <View name="SpecimensByCategory">
+            <Query>
+                <![CDATA[
+                    SELECT Species, Location, CollectionDate, Collector, Description
+                    FROM Specimens
+                    WHERE Category = ?
+                ]]>
+            </Query>
+        </View>
+        <!-- Add more views as needed -->
+    </Views>
+    <Triggers>
+        <Trigger name="CheckDateRange">
+            <Condition>
+                <![CDATA[
+                    NEW.CollectionDate >= '2024-01-01' AND NEW.CollectionDate <= '2024-12-31'
+                ]]>
+            </Condition>
+            <Action>
+                <![CDATA[
+                    -- Perform action if condition is met
+                ]]>
+            </Action>
+        </Trigger>
+        <!-- Add more triggers as needed -->
+    </Triggers>
+</Database>
